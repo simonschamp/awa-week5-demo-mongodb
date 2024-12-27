@@ -20,12 +20,12 @@ function initialize() {
     const vip = document.getElementById("vip");
     console.log(poemInput);
 
-    let poemData = await fetch("http://localhost:8000", {
+    let poemData = await fetch("http://localhost:8000/api/poem", {
       method: "post",
       headers: {
         "Content-type": "application/json",
       },
-      body: '{"poem": "' + poemInput.value + '"}',
+      body: '{"poem": "' + poemInput.value + '", "vip": ' + vip.checked + "}",
     });
     const poemsJson = await poemData.json();
     console.log(poemsJson);
@@ -36,7 +36,7 @@ function initialize() {
   const addPoemButtonFromAPI = document.getElementById("add-poem-from-api");
 
   addPoemButtonFromAPI.addEventListener("click", async function () {
-    const poemData = await fetch("http://localhost:8000");
+    const poemData = await fetch("http://localhost:8000/api/poems");
     const poemsJson = await poemData.json();
 
     poemsJson.forEach((poem) => {
